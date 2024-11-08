@@ -1,24 +1,27 @@
 import React from "react";
 import { Button } from "../ui/button";
-import { AlignJustify, LogOut } from "lucide-react";
+import { AlignJustify,} from "lucide-react";
 import { useDispatch } from "react-redux";
-import { logoutUser } from "@/store/auth-slice";
-import { useToast } from "@/hooks/use-toast";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function AdminHeader({setOpen}) {
 const dispatch=useDispatch()
-const {toast}=useToast()
+// const {toast}=useToast()
+const navigate=useNavigate
+
 
 function handleLogout(){
-  dispatch(logoutUser()).then((data)=>{
-    if(data?.payload.success){
-      toast({
-        title: "Logout successfully",
-      });
-    }
-  })
+  // dispatch(logoutUser()).then((data)=>{
+  //   if(data?.payload.success){
+  //     toast({
+  //       title: "Logout successfully",
+  //     });
+  //   }
+  // })
   
-
+  dispatch(resetTokenAndCredentials())
+  sessionStorage.clear()
+  navigate('/auth/login')
   
   ;
 }
