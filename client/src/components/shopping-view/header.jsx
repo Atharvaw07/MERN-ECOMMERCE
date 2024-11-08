@@ -11,8 +11,8 @@ import {
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 import { shoppingViewHeaderMenuItems } from "@/config";
-import { useToast } from "@/hooks/use-toast";
-import { logoutUser } from "@/store/auth-slice";
+// import { useToast } from "@/hooks/use-toast";
+import {  resetTokenAndCredentials } from "@/store/auth-slice";
 import { HousePlug, LogOut, Menu, ShoppingCart, UserCog } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -72,16 +72,21 @@ function HeaderRightContent() {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { toast } = useToast();
+  // const { toast } = useToast();
 
   function handelLogout() {
-    dispatch(logoutUser()).then((data) => {
-      if (data?.payload.success) {
-        toast({
-          title: "Logout Successfully",
-        });
-      }
-    });
+
+    dispatch(resetTokenAndCredentials())
+    sessionStorage.clear()
+    navigate('/auth/login')
+
+    // dispatch(logoutUser()).then((data) => {
+    //   if (data?.payload.success) {
+    //     toast({
+    //       title: "Logout Successfully",
+    //     });
+    //   }
+    // });
   }
 
   useEffect(() => {
