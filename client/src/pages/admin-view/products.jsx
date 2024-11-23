@@ -100,7 +100,8 @@ function AdminProducts() {
     dispatch(fetchAllProducts());
   }, [dispatch]);
 
-  console.log(productList, "productList");
+  // console.log(productList, "productList");
+  
 
   return (
     <>
